@@ -1,0 +1,43 @@
+{% extends "admin/base.html" %}
+
+{% block extrahead %}
+    {{ block.super }}
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            document.querySelectorAll(".file-upload a").forEach(function (link) {
+                link.setAttribute("target", "_blank");
+            });
+        });
+    </script>
+    {% if request.user.is_authenticated %}
+    {% if request.user.is_superuser or "Store Manager" or "Factory Manager" or "Customer" in request.user.groups.all.values_list.0%}
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            let adminHeader = document.querySelector("#header");
+            if (adminHeader) {
+                let button = document.createElement("a");
+                button.href = "{% url 'order_table' %}";
+                button.innerText = "Order Table";
+                button.className = "custom-admin-btn";
+                adminHeader.appendChild(button);
+            }
+        });
+    </script>
+    {% endif %}
+    {% endif %}
+    <style>
+        .custom-admin-btn {
+            display: inline-block;
+            margin-left: 20px;
+            padding: 8px 15px;
+            background: #548b99;
+            color: white;
+            text-decoration: none;
+            border-radius: 5px;
+            font-weight: bold;
+        }
+        .custom-admin-btn:hover {
+            background: rgb(51, 107, 121);
+        }
+    </style>
+{% endblock %}

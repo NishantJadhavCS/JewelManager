@@ -1,0 +1,7 @@
+{% extends "admin/change_form.html" %}
+
+{% block object-tools-items %}
+    {% if not request.user.groups.all.0.name == "Customer" %}
+        {{ block.super }}
+    {% endif %}
+{% endblock %}

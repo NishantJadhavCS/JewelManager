@@ -1,0 +1,9 @@
+__pycache__/
+*.py[cod]gi
+jewellery/.env
+**/migrations
+**/migrations/*.py
+!**/migrations/__init__.py
+**/migrations/*.pyc
+staticfiles/
+media/
